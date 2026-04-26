@@ -1,0 +1,422 @@
+<!doctype html>
+<html>
+<head>
+	<title>A Food Website</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+#mndiv {
+	background-image: url('pexels-cottonbro-3296538.jpg');
+	background-size: cover;
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	flex-direction: column;
+	gap: 50px;
+	position: relative;
+	margin: 0;
+}
+
+/* Navbar Styling */
+.navbar {
+	background: rgba(0, 0, 0, 0.9) !important;
+	backdrop-filter: blur(15px);
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+	padding: 15px 0;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	width: 100%;
+}
+
+.navbar-brand {
+	color: #ffc107 !important;
+	font-family: 'Rajdhani', sans-serif;
+	font-weight: 700;
+	font-size: 1.8rem;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.nav-link {
+	color: white !important;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	margin: 0 15px;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+.nav-link::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 2px;
+	bottom: -5px;
+	left: 50%;
+	background: #ffc107;
+	transition: all 0.3s ease;
+	transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+	width: 80%;
+}
+
+.nav-link:hover {
+	color: #ffc107 !important;
+	transform: translateY(-2px);
+}
+
+/* Main Heading */
+.main-heading {
+	color: white;
+	font-family: 'Cinzel', serif;
+	font-size: 4.5rem;
+	font-weight: 700;
+	text-align: center;
+	text-shadow: 4px 4px 12px rgba(0,0,0,0.9);
+	line-height: 1.1;
+	letter-spacing: 3px;
+	margin: 80px 0 40px 0;
+	animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: ;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.tagline {
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.3rem;
+	text-align: center;
+	margin: 20px 0 60px 0;
+	line-height: 1.6;
+	max-width: 800px;
+	opacity: 0.95;
+}
+
+.tagline p {
+	margin: 8px 0;
+	animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.cards-row {
+	display: flex;
+	justify-content: center;
+	gap: 25px;
+	flex-wrap: wrap;
+	max-width: 1400px;
+	margin: 0 20px 40px 20px;
+	padding: 0 20px;
+}
+
+.card {
+	background: rgba(20, 20, 20, 0.95);
+	padding: 25px;
+	width: 220px;
+	height: 340px;
+	color: white;
+	border: 2px solid rgba(255,255,255,0.15);
+	border-radius: 20px;
+	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+	backdrop-filter: blur(10px);
+	position: relative;
+	overflow: hidden;
+}
+
+.card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255,193,7,0.1), transparent);
+	transition: left 0.5s;
+}
+
+.card:hover::before {
+	left: 100%;
+}
+
+.card:hover {
+	transform: translateY(-15px) scale(1.02);
+	box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+	border-color: rgba(255,193,7,0.6);
+	background: rgba(30, 30, 30, 0.98);
+}
+
+.card img {
+	width: 120px;
+	height: 140px;
+	margin: 0 auto 20px auto;
+	object-fit: contain;
+	filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+	border-radius: 12px;
+	transition: all 0.3s ease;
+	transform: translateY(0);
+}
+
+.card:hover img {
+	transform: translateY(-8px) scale(1.05);
+	filter: drop-shadow(0 8px 16px rgba(255,193,7,0.3));
+}
+
+.card h4 {
+	font-size: 22px;
+	margin-bottom: 12px;
+	font-weight: 700;
+	color: #fff;
+	font-family: 'Cinzel', serif;
+	transition: all 0.3s ease;
+}
+
+.card:hover h4 {
+	color: #ffc107;
+	text-shadow: 0 0 20px rgba(255,193,7,0.5);
+}
+
+.card p {
+	font-size: 16px;
+	opacity: 0.95;
+	margin-bottom: 20px;
+	flex-grow: 1;
+	line-height: 1.5;
+	color: #f0f0f0;
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
+
+.card:hover p {
+	color: #fff;
+}
+
+/* ULTIMATE BUTTON */
+.add-btn {
+	background: linear-gradient(45deg, #ffc107, #ffca2c, #ffd54f) !important;
+	border: none !important;
+	color: #000 !important;
+	padding: 14px 30px !important;
+	font-size: 16px !important;
+	font-weight: 800 !important;
+	border-radius: 50px !important;
+	margin-top: auto;
+	transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+	box-shadow: 
+		0 8px 25px rgba(255,193,7,0.4),
+		0 0 0 4px rgba(255,193,7,0.2) !important;
+	width: 100%;
+	font-family: 'Rajdhani', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.add-btn::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	background: rgba(255,255,255,0.3);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.6s ease;
+	z-index: 0;
+}
+
+.add-btn:hover::before {
+	width: 300px;
+	height: 300px;
+}
+
+.add-btn span {
+	position: relative;
+	z-index: 1;
+}
+
+.add-btn:hover {
+	background: linear-gradient(45deg, #ffca2c, #ffd54f, #ffc107) !important;
+	transform: translateY(-5px) scale(1.05);
+	box-shadow: 
+		0 15px 40px rgba(255,193,7,0.6),
+		0 0 0 8px rgba(255,193,7,0.3),
+		inset 0 0 20px rgba(255,255,255,0.2) !important;
+	color: #000 !important;
+	animation: pulse 0.6s infinite;
+}
+
+@keyframes pulse {
+	0% { box-shadow: 0 15px 40px rgba(255,193,7,0.6), 0 0 0 8px rgba(255,193,7,0.3); }
+	50% { box-shadow: 0 20px 50px rgba(255,193,7,0.8), 0 0 0 12px rgba(255,193,7,0.4); }
+	100% { box-shadow: 0 15px 40px rgba(255,193,7,0.6), 0 0 0 8px rgba(255,193,7,0.3); }
+}
+
+.add-btn:active {
+	transform: translateY(-2px) scale(1.02);
+	transition: all 0.2s ease;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+	.main-heading { font-size: 3rem; margin: 60px 20px 30px 20px; }
+	.tagline { font-size: 1.1rem; padding: 0 20px; }
+	.cards-row { gap: 20px; margin: 0 10px 30px 10px; }
+	.card { width: 200px; height: 320px; padding: 20px; }
+}
+
+@media (max-width: 768px) {
+	.main-heading { font-size: 2.5rem; }
+	.navbar-brand { font-size: 1.5rem; }
+	.nav-link { margin: 0 10px; font-size: 0.9rem; }
+	.card { width: 180px; height: 300px; }
+}
+</style>
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Little Red Hen</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="mndiv">
+	<!-- Main Heading -->
+	<div class="main-heading">
+		TRADITIONAL<br>ARTISAN BAKERY
+	</div>
+	
+	<!-- Tagline -->
+	<div class="tagline">
+		<p>Taste the flavor you deserve 🍔</p>
+		<p>Fresh, fast, and full of flavor</p>
+		<p>Where every bite feels amazing</p>
+		<p>Delicious food, delivered to your door</p>
+	</div>
+	
+	<!-- Cards -->
+	<div class="cards-row">
+		<div class="card">
+			<img src="Donut.png"/>
+			<h4>Donut</h4>
+			<p><strong>3 pcs $2</strong></p>
+			<button class="add-btn"><span>Add to Cart</span></button>
+		</div>
+
+		<div class="card">
+			<img src="Puff Pastry.png"/>
+			<h4>Puff Pastry</h4>
+			<p><strong>2 pcs $1</strong></p>
+			<button class="add-btn"><span>Add to Cart</span></button>
+		</div>
+
+		<div class="card">
+			<img src="Pastry2.png"/>
+			<h4>Cake Pastry</h4>
+			<p><strong>4 pcs $3.2</strong></p>
+			<button class="add-btn"><span>Add to Cart</span></button>
+		</div>
+
+		<div class="card">
+			<img src="Partha Roll.png"/>
+			<h4>Paratha Roll</h4>
+			<p><strong>2 pcs $1.5</strong></p>
+			<button class="add-btn"><span>Add to Cart</span></button>
+		</div>
+	</div>
+
+	<div class="cards-row">
+		<div class="card">
+			<img src="pastry1.png"/>
+			<h4>Simple Pastry</h4>
+			<p><strong>2 pcs $1</strong></p>
+			<button class="add-btn"><span>Add to Cart</span></button>
+		</div>
+
+		<div class="card">
+			<img src="samosaa.png"/>
+			<h4>Samosa</h4>
+			<p><strong>6 pcs $1.2</strong></p>
+			<button class="add-btn"><span>Add to Cart</span></button>
+		</div>
+
+		<div class="card">
+			<img src="Bargar.png"/>
+			<h4>Burger</h4>
+			<p><strong>Burger + Chips $2</strong></p>
+			<button class="add-btn"><span>Add to Cart</span></button>
+		</div>
+
+		<div class="card">
+			<img src="pizza.png"/>
+			<h4>Small Pizza</h4>
+			<p><strong>1 small $2.5</strong></p>
+			<button class="add-btn"><span>Add to Cart</span></button>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Button click animation
+$('.add-btn').click(function() {
+    var btn = $(this);
+    var originalText = btn.find('span').text();
+    
+    btn.find('span').text('Added! ✓');
+    btn.addClass('animate__animated animate__pulse');
+    
+    setTimeout(function() {
+        btn.removeClass('animate__animated animate__pulse');
+        btn.find('span').text(originalText);
+    }, 1500);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</body>
+</html>
